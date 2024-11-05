@@ -1,84 +1,79 @@
-from llama_index.core import SimpleDirectoryReader, VectorStoreIndex
-from llama_index.legacy.llms import Ollama
-from ollama import Client
-from llama_index.core import Settings
+import os
+from typing import List, Union, Generator, Iterator
 
-Settings.llm = Ollama(model='phi3', base_url='http://localhost:11434', temperature=0.1)
-
-
-def load_documents_and_build_index(query):
-
-    # Load documents from the specified dataset directory
-    documents = SimpleDirectoryReader("dataset").load_data()
-
-    # Build an index from the loaded documents
-    index = VectorStoreIndex.from_documents(documents)
-
-    # Create a query engine from the index
-    query_engine = index.as_query_engine()
-
-    # Retrieve and format query results from the engine
-    raw_response = query_engine.query(query)
-    processed_response = raw_response.get_response_text()
-
-    # Use Ollama to refine or process the response
-    ollama_response = process_with_ollama(processed_response)
-
-    return ollama_response
+from pydantic import BaseModel
+from llama_index.embeddings.ollama import OllamaEmbedding
+from llama_index.llms.ollama import Ollama
+from llama_index.core import Settings, VectorStoreIndex, SimpleDirectoryReader
+import asyncio
 
 
-def process_with_ollama(text):
+class Pipeline:
 
-    client = Client(host='http://localhost:11434')
+    class Valves(BaseModel):
+        LLAMAINDEX_OLLAMA_BASE_URL: str
+        LLAMAINDEX_MODEL_NAME: str
+        LLAMAINDEX_EMBEDDING_MODEL_NAME: str
 
-    # Define the prompt for Ollama
-    prompt = {
-        'role': 'user',
-        'content': text
-    }
+    def __init__(self):
+        self.documents = None
+        self.index = None
 
-    # Send the prompt to Ollama and retrieve the response
-    response = client.chat(model='llama3.1', messages=[prompt])
+        self.valves = self.Valves(
+            LLAMAINDEX_OLLAMA_BASE_URL=os.getenv("LLAMAINDEX_OLLAMA_BASE_URL", "http://localhost:11434"),
+            LLAMAINDEX_MODEL_NAME=os.getenv("LLAMAINDEX_MODEL_NAME", "llama3.1:8b"),
+            LLAMAINDEX_EMBEDDING_MODEL_NAME=os.getenv("LLAMAINDEX_EMBEDDING_MODEL_NAME", "jina/jina-embeddings-v2-base-en:latest"),
+        )
 
-    return response['message']['content']
+    async def on_startup(self):
+        Settings.embed_model = OllamaEmbedding(
+            model_name=self.valves.LLAMAINDEX_EMBEDDING_MODEL_NAME,
+            base_url=self.valves.LLAMAINDEX_OLLAMA_BASE_URL,
+        )
+        Settings.llm = Ollama(
+            model=self.valves.LLAMAINDEX_MODEL_NAME,
+            base_url=self.valves.LLAMAINDEX_OLLAMA_BASE_URL,
+        )
 
+        self.documents = SimpleDirectoryReader("dataset").load_data()
+        self.index = VectorStoreIndex.from_documents(self.documents)
 
-def evaluate_with_ollama(response_text):
+    async def on_shutdown(self):
+        pass
 
-    client = Client(host='http://localhost:11434')
+    def pipe(
+        self, user_message: str, model_id: str, messages: List[dict], body: dict
+    ) -> Union[str, Generator, Iterator]:
+        query_engine = self.index.as_query_engine(streaming=True)
+        response = query_engine.query(user_message)
+        return response.response_gen
 
-    # Define the evaluation prompt
-    evaluation_prompt = {
-        'role': 'user',
-        'content': f"Based on the following text, determine if the described service request is billable: \n\n{response_text}"
-    }
+async def main():
+    # Instantiate the pipeline
+    pipeline = Pipeline()
 
-    # Send the prompt to Ollama for evaluation
-    response = client.chat(model='llama3.1', messages=[evaluation_prompt])
+    # Simulate the server startup process
+    await pipeline.on_startup()
 
-    return response['message']['content']
+    # Define a sample question
+    sample_question = "What are the benefits of using renewable energy sources?"
 
+    # Simulate a user message
+    user_message = sample_question
+    model_id = "sample_model"  # This can be a placeholder or an actual model ID
+    messages = [{"role": "user", "content": user_message}]
+    body = {}  # Additional context or parameters if needed
 
-def main():
-    """
-    Main function to load documents, process a query, and evaluate the response.
-    """
-    # Sample customer request for evaluation
-    customer_request = "Request for emergency maintenance service on IMBL Scanner due to operational failure."
+    # Run the pipeline with the sample question
+    response_gen = pipeline.pipe(user_message, model_id, messages, body)
 
-    # Process the customer request using the query engine and Ollama
-    response_text = load_documents_and_build_index(customer_request)
-
-    # Evaluate the response text using Ollama's model
-    evaluation_result = evaluate_with_ollama(response_text)
-
-    # Display the results
-    print("Customer Request:", customer_request)
-    print("\nQuery Response:")
+    # Collect and print the response
+    response_text = ''.join(response_gen)
+    print("\nResponse:")
     print(response_text)
-    print("\nEvaluation Result:")
-    print(evaluation_result)
 
+    # Simulate the server shutdown process
+    await pipeline.on_shutdown()
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
