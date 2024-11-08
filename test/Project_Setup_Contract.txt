@@ -1,0 +1,73 @@
+Project Setup Contract
+
+This Project Setup Contract ("Agreement") is made and entered into as of [Effective Date], by and between:
+
+Client: [Client Name], with its principal place of business at [Client Address].
+
+Service Provider: [Service Provider Name], with its principal place of business at [Service Provider Address].
+
+WHEREAS, the Client desires to initiate a project involving the setup and configuration of [Project Description] at [Project Location];
+
+WHEREAS, the Service Provider agrees to perform the project setup and configuration services for the Client under the terms and conditions set forth herein;
+
+NOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, the parties agree as follows:
+
+1. Scope of Services
+The Service Provider shall perform setup and configuration services detailed in Exhibit A attached hereto ('Services') for the Project.
+2. Term
+This Agreement shall commence on [Start Date] and shall continue until completion of the Project setup, unless terminated earlier in accordance with this Agreement.
+3. Compensation
+The Client agrees to pay the Service Provider as outlined in Exhibit B, which includes fees and expenses associated with the Project setup. Payment Terms: Payments are due within 30 days of receipt of invoice.
+4. Service Provider Responsibilities
+Perform Services in a professional and workmanlike manner. Comply with all applicable laws, regulations, and industry standards. Provide all necessary labor, tools, and materials to complete the Project setup.
+5. Client Responsibilities
+Provide the Service Provider with reasonable access to the project site and any necessary information. Ensure the site is prepared for the Service Provider’s work and promptly address any issues that may delay the Project setup.
+6. Confidentiality
+The Service Provider agrees to maintain the confidentiality of any proprietary information received during the course of this Agreement and shall not disclose it without the Client's written consent.
+7. Warranties and Representations
+The Service Provider warrants that all setup services will be performed in accordance with industry standards. The Client warrants that it has the authority to enter into this Agreement and to permit the Service Provider to perform the Services.
+8. Indemnification
+Each party agrees to indemnify and hold harmless the other from any claims, damages, or liabilities arising out of any breach of this Agreement or negligence.
+9. Limitation of Liability
+Neither party shall be liable for any indirect, incidental, or consequential damages arising out of this Agreement.
+10. Insurance
+The Service Provider shall maintain adequate insurance coverage, including general liability and workers' compensation insurance, and provide proof upon request.
+11. Termination
+For Convenience: Either party may terminate this Agreement with 30 days' written notice. For Cause: Either party may terminate immediately upon breach of this Agreement by the other party, provided the breach is not cured within 15 days of written notice.
+12. Force Majeure
+Neither party shall be liable for delays or failures in performance resulting from acts beyond its reasonable control.
+13. Dispute Resolution
+Any disputes arising under this Agreement shall be resolved through mediation before resorting to litigation.
+14. Governing Law
+This Agreement shall be governed by and construed in accordance with the laws of [State/Country].
+15. Entire Agreement
+This Agreement, including all exhibits, constitutes the entire agreement between the parties and supersedes all prior negotiations and understandings.
+16. Amendments
+Any amendments to this Agreement must be in writing and signed by both parties.
+17. Severability
+If any provision of this Agreement is found to be unenforceable, the remaining provisions shall remain in full force and effect.
+18. Notices
+All notices under this Agreement shall be in writing and sent to the addresses specified above.
+19. Project Service Levels
+
+    The Service Provider agrees to meet the following service levels during the Project setup:
+
+    19.1. Timeliness
+    - All phases of the Project shall be completed by the deadlines specified in the Project timeline (Exhibit A). Delays due to Client requirements or unforeseen circumstances will be managed and documented.
+
+    19.2. Quality Assurance
+    - All setup tasks shall meet the standards agreed upon by both parties. Testing and inspection will be performed to ensure compliance.
+
+    19.3. Reporting and Communication
+    - Weekly updates shall be provided to the Client detailing progress, any challenges, and planned next steps.
+    - The Service Provider shall promptly inform the Client of any issues impacting the timeline or budget.
+
+    19.4. Change Requests
+    - Any changes to the Project scope, timeline, or costs shall be documented and approved by both parties before implementation.
+
+    19.5. Penalties
+    - In the event of significant delays or quality failures, a penalty of [Percentage]% of the project fee may be applied, as outlined in Exhibit B.
+
+    19.6. Exclusions
+    - Delays or issues caused by external factors (e.g., third-party vendors, force majeure) shall not impact the service level performance of the Service Provider.
+    
