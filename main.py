@@ -33,7 +33,7 @@ class RAG:
             base_url=self.parameters.LLAMAINDEX_OLLAMA_BASE_URL,
         )
 
-        self.documents = SimpleDirectoryReader("dataset").load_data()
+        self.documents = SimpleDirectoryReader("test/dataset").load_data()
         self.index = VectorStoreIndex.from_documents(self.documents)
 
     def on_shutdown(self):
