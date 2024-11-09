@@ -65,6 +65,7 @@ def run_query_sync(query: str) -> str:
 
 if __name__ == "__main__":
     query = "Subject: IMBL Scanner Breakdown - Immediate Repair Required Dear Support Team, We are experiencing a sudden breakdown of our IMBL Scanner, rendering it non-operational. We request immediate assistance for emergency repairs to restore functionality as soon as possible. Thank you for your prompt attention to this matter. Best regards, [Customer Name]"
-    response = run_query_sync(query)
+    text = "evaluate if the query is billable or not based on the 'maintainance service agreements' and state the key section in the SLA you used to make the evaluation. respond in this format: '[billable] or [not billable], [evaluation]'"
+    response = run_query_sync(text)
     print("\nResponse:")
     print(response)
